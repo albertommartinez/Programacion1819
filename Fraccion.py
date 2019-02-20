@@ -83,4 +83,4 @@ Multiplicar dos fracciones
         print(numerador()+"/"+denominador())
         
     if __name__ == "__main__":
-        Fraccion
+       
