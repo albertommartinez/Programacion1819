@@ -46,20 +46,8 @@ class Tiempo {
 		ssActual += ss;
 		formatearHora(hh,mm,ss);
 	}
-/**
- * le resta las horas(hh), minutos(mm) y segundos(ss)
- * pasados por parametro a los seteados en el objeto
- * Calendar, previamente declarado	
- * @param hh int
- * @param mm int
- * @param ss int
- 
-	public void restar(int hh,int mm, int ss) {
-		sameDate.add(Calendar.HOUR_OF_DAY,(hh*-1));
-		sameDate.add(Calendar.MINUTE,(mm*-1));
-		sameDate.add(Calendar.SECOND,(ss*-1));		
-	}
-*/
+
+
 public int getHh() {
 	return hh;
 }
