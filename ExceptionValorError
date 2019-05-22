@@ -1,0 +1,9 @@
+public class ExceptionValorError extends Exception {
+	ExceptionValorError(){
+		
+	}
+	
+	public String excepcionValor(Double valor) {
+		return "El valor no puebe ser negativo";
+	}
+}
