@@ -57,7 +57,7 @@ class Rectangulo {
 
   @Override
   public String toString() {
-    return "Rectangulo [ancho=" + getAncho() + ", alto=" + getAlto() + "]";
+    return "Rectangulo [ancho=" + getAncho() + ", alto=" + getAlto() + "\n" + pintarRectangulo()"]";
   }
   
   
