@@ -36,11 +36,24 @@ import java.util.Scanner;
 		
 		int opcionIva = 0;
 		
-		menu.crearMenu("Elige IVA", ivas);
-		opcionIva = Teclado.nextInt();
+		opcionIva = menu.crearMenu("Elige IVA", ivas);
+		
 		
 		campos = new String[] {descripcion,precioCompra.toString(),precioVenta.toString(),Integer.toString(stock) ,ivas[opcionIva].toString()};
 		return campos;
+	}
+/**
+ * escribe por pantalla los campos de un articulo pasado por parametro	
+ * @param articulo Articulo
+ */
+	public void imprimirArticulo(Articulo articulo) {
+		System.out.println("----------------------------------------------------");
+		System.out.println(" Descripcion........."+articulo.getDescripcion());
+		System.out.println(" Precio de compra:..."+articulo.getPrecioCompra());
+		System.out.println(" Precio de venta:...."+articulo.getPrecioVenta());
+		System.out.println(" Stock:.............."+articulo.getStock());
+		System.out.println(" I.V.A:.............."+articulo.getIva());
+		System.out.println("----------------------------------------------------");
 	}
 /**
  * Crear objeto Articulo	
@@ -54,6 +67,8 @@ import java.util.Scanner;
 		String[] campos = recogerDatos();
 		
 		Articulo articulo = new Articulo(campos[0],Double.parseDouble(campos[1]),Double.parseDouble(campos[2]),Integer.parseInt(campos[3]),campos[4]);
+		
+		imprimirArticulo(articulo);
 		return articulo;
 	}
 /**

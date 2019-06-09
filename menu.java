@@ -18,7 +18,7 @@ class menu {
 	public static int crearMenu(String titulo,String[] opciones) {
 		Scanner teclado = new Scanner(System.in);//instancia el objeto Scanner
 		int longitudOpciones = opciones.length;
-		int opcion=0;
+		int opcionMenu=0;
 		
 		try {
 			do {//Vuelve a mostrar menu si la opcion no es valida
@@ -30,12 +30,12 @@ class menu {
 				}while((i>-1)&&(i<longitudOpciones));
 				System.out.print("\n");
 				System.out.println("Introduce opcion> ");
-				opcion = teclado.nextInt();//Recoge opcion
-			}while((opcion<0)||(opcion>longitudOpciones-1));
+				opcionMenu = teclado.nextInt();//Recoge opcion
+			}while((opcionMenu<0)||(opcionMenu>longitudOpciones-1));
 		}catch(Exception e){
 			System.out.println("Ha ocurrido un error referente al menu");
 		}
-		return opcion;//Devuelve opcion
+		return opcionMenu;//Devuelve opcion
 	}
 	
 }
