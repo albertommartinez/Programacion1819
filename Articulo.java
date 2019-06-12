@@ -10,15 +10,19 @@ public class Articulo {
 	private Double precioCompra;
 	private Double precioVenta;
 	private int stock;
-	private String tipoIva;
+	private iva tipoIva;
 	
-	Articulo(String descripcion,Double precioCompra,Double precioVenta,int stock,String tipoIva) {
-		setCodigo();
+	Articulo() {
+		
+	}
+	
+	Articulo(String descripcion,Double precioCompra,Double precioVenta,int stock,iva tipoIva) {
 		setDescripcion(descripcion);
 		setPrecioCompra(precioCompra);
 		setPrecioVenta(precioVenta);
 		setStock(stock);
 		setIva(tipoIva);
+		setCodigo();
 	}
 	
 	private void setCodigo() {
@@ -63,11 +67,11 @@ public class Articulo {
 	
 	
 
-	public String getIva() {
+	public iva getIva() {
 		return tipoIva;
 	}
 
-	public void setIva(String tipoIva) {
+	public void setIva(iva tipoIva) {
 		this.tipoIva = tipoIva;
 	}
 

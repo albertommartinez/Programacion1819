@@ -10,7 +10,7 @@ import java.util.Scanner;
 class Test {
 
 	public static void main(String[] args) {
-		Scanner Teclado = new Scanner(System.in);//instancia el objeto Scanner
+		//Scanner Teclado = new Scanner(System.in);//instancia el objeto Scanner
 		Almacen almacen = new Almacen();
 		Articulo articulo = null;
 		String[] opciones = {"Salir","Alta producto","Baja producto","Modificacion producto","Entrada mercancia","Salida mercancia","Mostrar productos"};
@@ -23,38 +23,36 @@ class Test {
 					case 0:
 						System.exit(0);
 					case 1:
-						almacen.crearArticulo();
+						//almacen.crearArticulo();
+						almacen.almacen.add(new Articulo());
 						break;
 					case 2:
 						almacen.listarElementos(almacen.almacen);
-						opcion = Teclado.nextInt();
+						opcion = Teclado.leerEntero("> ");
 						almacen.baja(opcion);
 						break;
-					case 3:
+					case 3: 
 						//modificación del artículo
 						almacen.listarElementos(almacen.almacen);
-						System.out.println("Elige el producto a modificar> ");
-						opcion = Teclado.nextInt();
-						almacen.modificarElemento(almacen.obtenerElemento(opcion));
+						opcion = Teclado.leerEntero("Elige el producto a modificar> ");
+						String descripcion = Teclado.leerCadena("Descripcion> ");
+						double precioVenta = Teclado.leerDecimal("PrecioVenta> ");
+						double precioCompra = Teclado.leerDecimal("PrecioCompra> ");
+						almacen.modificarElemento(almacen.almacen.get(opcion),descripcion,precioVenta,precioCompra);
 						break;
 					case 4:
 						//entrada mercancía
 						almacen.listarElementos(almacen.almacen);
 						//preguntar aqui el articulo 
-						System.out.println("mercancia> ");
-						String mercancia = Teclado.next();
-						if(!almacen.almacen.contains(mercancia)) {
-							System.out.println("cantidad> ");
-							int cantidad = Teclado.nextInt();
-							almacen.entradaElemento(almacen.crearArticulo(), cantidad);
-						}
+						String mercancia = Teclado.leerCadena("Mercancia> ");
+						int cantidad = Teclado.leerEntero("Cantidad> ");
+						almacen.entradaElemento(articulo, cantidad);
 						almacen.listarElementos(almacen.almacen);
 						break;
 					case 5:
 						//salida mercancía
 						almacen.listarElementos(almacen.almacen);
-						System.out.println("cantidad> ");
-						int cantidad = Teclado.nextInt();
+						cantidad = Teclado.leerEntero("Cantidad> ");
 				
 					if(almacen.almacen.contains(articulo)) {
 							almacen.salidaElemento(almacen.almacen,articulo,cantidad);
@@ -66,7 +64,7 @@ class Test {
 						break;	
 				}
 			}catch(Exception e) {
-				System.err.println("Has insertado un valor no valido");
+				System.out.println("Has insertado un valor no valido");
 			}
 		}while((opcion>0)&&(opcion<opciones.length));
 		

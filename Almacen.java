@@ -1,6 +1,7 @@
 package gestisimal;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 /**
  * Objeto Almacen
@@ -8,45 +9,17 @@ import java.util.Scanner;
  *
  */
  class Almacen {
-	ArrayList<Articulo> almacen = new ArrayList<Articulo>();
+	protected ArrayList<Articulo> almacen = new ArrayList<Articulo>();
 	private Scanner Teclado = new Scanner(System.in);//instancia el objeto Scanner
 	private String[] ivas = {iva.GENERAL.toString(),iva.REDUCIDO.toString(),iva.SUPER_REDUCIDO.toString()};
 	private String[] campos; //= new String[5];
 	
-/**
- * Pregunta al usuario los valores de los
- * campos del objeto	
- * @return campos Object[]
- */
-	public String[] recogerDatos() {
-		//Campo descripcion
-		System.out.println("Introduce campo descripcion> ");
-		String descripcion = Teclado.next();
-		//Campo precioCompra
-		System.out.println("Introduce campo precioCompra> ");
-		Double precioCompra = Teclado.nextDouble();
-		//Campo precioVenta
-		System.out.println("Introduce campo precioVenta> ");
-		Double precioVenta = Teclado.nextDouble();
-		//Campo stock
-		System.out.println("Introduce campo stock> ");
-		int stock = Teclado.nextInt();
-		//menu tipo de iva
-		
-		
-		int opcionIva = 0;
-		
-		opcionIva = menu.crearMenu("Elige IVA", ivas);
-		
-		
-		campos = new String[] {descripcion,precioCompra.toString(),precioVenta.toString(),Integer.toString(stock) ,ivas[opcionIva].toString()};
-		return campos;
-	}
+
 /**
  * escribe por pantalla los campos de un articulo pasado por parametro	
  * @param articulo Articulo
  */
-	public void imprimirArticulo(Articulo articulo) {
+	protected void imprimirArticulo(Articulo articulo) {
 		System.out.println("----------------------------------------------------");
 		System.out.println(" Descripcion........."+articulo.getDescripcion());
 		System.out.println(" Precio de compra:..."+articulo.getPrecioCompra());
@@ -63,10 +36,10 @@ import java.util.Scanner;
  * @param stock int
  * @return Articulo
  */
-	public Articulo crearArticulo() {
-		String[] campos = recogerDatos();
+	protected Articulo crearArticulo(String descripcion,double precioCompra,double precioVenta,int stock,iva tipoIva) {
+		//String[] campos = recogerDatos();
 		
-		Articulo articulo = new Articulo(campos[0],Double.parseDouble(campos[1]),Double.parseDouble(campos[2]),Integer.parseInt(campos[3]),campos[4]);
+		Articulo articulo = new Articulo(descripcion,precioCompra,precioVenta,stock,tipoIva);
 		
 		imprimirArticulo(articulo);
 		return articulo;
@@ -76,7 +49,7 @@ import java.util.Scanner;
  * @param articulo
  * @return boolean
  */
-	public boolean alta(Articulo articulo) {
+	protected boolean alta(Articulo articulo) {
 		try {
 		if(!almacen.contains(articulo)) {
 			almacen.add(articulo);
@@ -92,7 +65,7 @@ import java.util.Scanner;
  * @param indice
  * @return Articulo
  */
-	public Articulo obtenerElemento(int indice) {
+	protected Articulo obtenerElemento(int indice) {
 		if((indice<almacen.size()-1)&&(indice>-1)) {
 			return almacen.get(indice);
 		}
@@ -103,7 +76,7 @@ import java.util.Scanner;
  * @param indice
  * @return boolean
  */
-	public boolean baja(int indice) {
+	protected boolean baja(int indice) {
 		if((indice<almacen.size()-1)&&(indice>-1)) {
 			almacen.remove(indice);
 			return true;
@@ -115,18 +88,11 @@ import java.util.Scanner;
  * @param articulo
  * @return boolean
  */
-	public boolean modificarElemento(Articulo articulo) { 
+	protected boolean modificarElemento(Articulo articulo,String descripcion,double precioCompra,double precioVenta) { 
 		  boolean respuesta = false;
-		  System.out.println("Modifica de nuevo la descripcion");
-		  articulo.setDescripcion(Teclado.next());
-		  
-		  
-		  System.out.println("Modifica de nuevo el precioCompra");
-		  articulo.setPrecioCompra(Teclado.nextDouble());
-		 
-		  
-		  System.out.println("Modifica de nuevo la precioVenta");
-		  articulo.setPrecioVenta(Teclado.nextDouble());
+		  articulo.setDescripcion(descripcion);
+		  articulo.setPrecioCompra(precioCompra);
+		  articulo.setPrecioVenta(precioVenta);
 		  return respuesta=true;
 		  
 		}
@@ -137,7 +103,7 @@ import java.util.Scanner;
  * @param cantidad
  * @return boolean
  */
-	public boolean entradaElemento(Articulo elemento,int cantidad) {
+	protected boolean entradaElemento(Articulo elemento,int cantidad) {
 		try {
 			if(almacen.contains(elemento)) {
 				elemento.setStock(elemento.getStock()+cantidad);
@@ -156,7 +122,7 @@ import java.util.Scanner;
  * @param articulo
  * @return cantidad int
  */
-	private int contarElementos(ArrayList arrayList,Articulo articulo) {
+	protected int contarElementos(ArrayList arrayList,Articulo articulo) {
 		int cantidad = 0;
 		for(int i=0;i<arrayList.size();i++) {
 			if(articulo.equals(arrayList.get(i))) {
@@ -168,7 +134,7 @@ import java.util.Scanner;
 /**
  * Lista todos los articulos del almacen	
  */
-	public void listarElementos(ArrayList<Articulo> arrayList) {
+	protected void listarElementos(ArrayList<Articulo> arrayList) {
 		if(arrayList.size()>0) {
 			for(int i=0;i<arrayList.size();i++) {
 				System.out.println(i+"."+arrayList.get(i));	
@@ -187,7 +153,7 @@ import java.util.Scanner;
  * @return boolean
  */
 
-		public boolean salidaElemento(ArrayList arrayList,Articulo articulo,int cantidad) {
+	protected boolean salidaElemento(ArrayList arrayList,Articulo articulo,int cantidad) {
 			if(almacen.contains(articulo)) {
 				if(cantidad >= contarElementos(arrayList,articulo)) {
 					articulo.setStock(articulo.getStock()-cantidad);
@@ -199,4 +165,11 @@ import java.util.Scanner;
 			}
 			return true;
 		}
+@Override
+public String toString() {
+	return "Almacen [almacen=" + almacen + ", Teclado=" + Teclado + ", ivas=" + Arrays.toString(ivas) + ", campos="
+			+ Arrays.toString(campos) + "]";
+}
+	
+	
 }
