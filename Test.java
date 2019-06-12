@@ -40,16 +40,21 @@ class Test {
 					case 4:
 						//entrada mercancía
 						almacen.listarElementos(almacen.almacen);
-						System.out.println("cantidad> ");
-						int cantidad = Teclado.nextInt();
-						almacen.entradaElemento(almacen.crearArticulo(), cantidad);
+						//preguntar aqui el articulo 
+						System.out.println("mercancia> ");
+						String mercancia = Teclado.next();
+						if(!almacen.almacen.contains(mercancia)) {
+							System.out.println("cantidad> ");
+							int cantidad = Teclado.nextInt();
+							almacen.entradaElemento(almacen.crearArticulo(), cantidad);
+						}
 						almacen.listarElementos(almacen.almacen);
 						break;
 					case 5:
 						//salida mercancía
 						almacen.listarElementos(almacen.almacen);
 						System.out.println("cantidad> ");
-						cantidad = Teclado.nextInt();
+						int cantidad = Teclado.nextInt();
 				
 					if(almacen.almacen.contains(articulo)) {
 							almacen.salidaElemento(almacen.almacen,articulo,cantidad);

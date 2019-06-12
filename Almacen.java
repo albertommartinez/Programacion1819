@@ -118,15 +118,15 @@ import java.util.Scanner;
 	public boolean modificarElemento(Articulo articulo) { 
 		  boolean respuesta = false;
 		  System.out.println("Modifica de nuevo la descripcion");
-		  articulo.setDescripcion(System.console().readLine());
+		  articulo.setDescripcion(Teclado.next());
 		  
 		  
 		  System.out.println("Modifica de nuevo el precioCompra");
-		  articulo.setPrecioCompra(Double.parseDouble(System.console().readLine()));
+		  articulo.setPrecioCompra(Teclado.nextDouble());
 		 
 		  
 		  System.out.println("Modifica de nuevo la precioVenta");
-		  articulo.setPrecioVenta(Double.parseDouble(System.console().readLine()));
+		  articulo.setPrecioVenta(Teclado.nextDouble());
 		  return respuesta=true;
 		  
 		}
@@ -169,11 +169,13 @@ import java.util.Scanner;
  * Lista todos los articulos del almacen	
  */
 	public void listarElementos(ArrayList<Articulo> arrayList) {
-		
-		for(int i=0;i<arrayList.size();i++) {
-			System.out.println(i+"."+arrayList.get(i));	
+		if(arrayList.size()>0) {
+			for(int i=0;i<arrayList.size();i++) {
+				System.out.println(i+"."+arrayList.get(i));	
+			}
+		}else{
+				System.out.println("No hay articulos registrados");
 		}
-		
 	}
 
 /**
